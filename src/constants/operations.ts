@@ -1,0 +1,8 @@
+export const OPERATIONS = {
+  ADD: 'ADD',
+  SUBTRACT: 'SUBTRACT',
+  MULTIPLY: 'MULTIPLY',
+  DIVIDE: 'DIVIDE',
+  MODULO: 'MODULO',
+  EQUALS: 'EQUALS',
+} as const

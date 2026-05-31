@@ -1,8 +1,11 @@
+import { Calculator } from './components/calculator/Calculator'
+import { AppShell } from './components/layout/AppShell'
+
 function App() {
   return (
-    <main>
-      <h1>CalculaTRON</h1>
-    </main>
+    <AppShell>
+      <Calculator />
+    </AppShell>
   )
 }
 
