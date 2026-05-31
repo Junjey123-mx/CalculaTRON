@@ -1,10 +1,79 @@
 .button {
   cursor: pointer;
   min-height: 3rem;
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-tech);
   font-size: 1rem;
-  border: none;
-  background: transparent;
-  color: inherit;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
   width: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(0, 234, 255, 0.18);
+  color: var(--text-muted);
+  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.number {
+  border-color: rgba(0, 119, 255, 0.28);
+  color: var(--text-primary);
+}
+
+.number:hover {
+  background: rgba(0, 119, 255, 0.1);
+  border-color: rgba(0, 119, 255, 0.6);
+  box-shadow: var(--glow-blue);
+  color: var(--color-cyan);
+}
+
+.operator {
+  border-color: rgba(255, 159, 28, 0.32);
+  color: var(--color-orange);
+}
+
+.operator:hover {
+  background: rgba(255, 159, 28, 0.1);
+  border-color: rgba(255, 159, 28, 0.62);
+  box-shadow: var(--glow-orange);
+}
+
+.equals {
+  background: rgba(0, 234, 255, 0.07);
+  border-color: rgba(0, 234, 255, 0.45);
+  color: var(--color-cyan);
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+}
+
+.equals:hover {
+  background: rgba(0, 234, 255, 0.15);
+  border-color: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+  color: #fff;
+  text-shadow: var(--glow-cyan);
+}
+
+.danger {
+  border-color: rgba(255, 43, 214, 0.32);
+  color: var(--color-magenta);
+}
+
+.danger:hover {
+  background: rgba(255, 43, 214, 0.1);
+  border-color: rgba(255, 43, 214, 0.62);
+  box-shadow: 0 0 14px rgba(255, 43, 214, 0.5);
+}
+
+.utility {
+  border-color: rgba(125, 223, 255, 0.18);
+  color: var(--text-muted);
+}
+
+.utility:hover {
+  background: rgba(125, 223, 255, 0.07);
+  border-color: rgba(125, 223, 255, 0.38);
+  color: var(--text-primary);
 }

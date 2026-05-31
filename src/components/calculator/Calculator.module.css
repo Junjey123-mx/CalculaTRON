@@ -1,3 +1,30 @@
 .calculator {
   width: min(92vw, 420px);
+  background: var(--color-panel);
+  border: 1px solid rgba(0, 234, 255, 0.22);
+  box-shadow: var(--glow-cyan), inset 0 0 40px rgba(0, 234, 255, 0.03);
+  padding: 1.25rem;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.calculator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-cyan), var(--color-magenta), transparent);
+}
+
+.calculator::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 234, 255, 0.35), transparent);
 }
