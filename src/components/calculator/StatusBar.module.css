@@ -2,6 +2,7 @@
   font-size: 0.65rem;
   letter-spacing: 0.12em;
   opacity: 0.6;
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
   padding: 0.25rem 0;
 }

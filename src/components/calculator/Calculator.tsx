@@ -1,3 +1,4 @@
+import { useCalculator } from '../../hooks/useCalculator'
 import { CalculatorHeader } from './CalculatorHeader'
 import { Display } from './Display'
 import { Keypad } from './Keypad'
@@ -5,16 +6,14 @@ import { StatusBar } from './StatusBar'
 import styles from './Calculator.module.css'
 
 export function Calculator() {
-  const handleButtonPress = (value: string) => {
-    void value
-  }
+  const { display, status, handleButtonPress } = useCalculator()
 
   return (
-    <div className={styles.calculator}>
+    <section className={styles.calculator} aria-label="CalculaTRON calculator">
       <CalculatorHeader />
-      <StatusBar status="READY" />
-      <Display value="0" />
+      <StatusBar status={status} />
+      <Display value={display} isError={status === 'ERROR'} />
       <Keypad onButtonPress={handleButtonPress} />
-    </div>
+    </section>
   )
 }

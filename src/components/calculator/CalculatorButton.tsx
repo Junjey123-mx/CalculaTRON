@@ -9,11 +9,9 @@ type CalculatorButtonProps = {
 
 export function CalculatorButton({ label, value, kind = 'number', onPress }: CalculatorButtonProps) {
   return (
-    <button
-      type="button"
+    <button type="button" onClick={() => onPress(value)}
       className={`${styles.button} ${styles[kind] ?? ''}`}
-      onClick={() => onPress(value)}
-      aria-label={label}
+      aria-label={`calculator button ${label}`}
     >
       {label}
     </button>

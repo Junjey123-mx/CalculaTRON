@@ -1,9 +1,10 @@
 export function useCalculator() {
-  return {
-    display: '0',
-    status: 'READY',
-    handleButtonPress: (value: string) => {
-      void value
-    },
+  const display = '0'
+  const status = 'READY'
+
+  const handleButtonPress = (value: string) => {
+    void value
   }
+
+  return { display, status, handleButtonPress }
 }

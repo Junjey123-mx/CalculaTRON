@@ -8,11 +8,13 @@ type DisplayProps = {
 export function Display({ value, isError = false }: DisplayProps) {
   return (
     <div
-      className={`${styles.display}${isError ? ` ${styles.error}` : ''}`}
+      className={styles.display}
       aria-label="calculator display"
       aria-live="polite"
+      data-error={isError ? 'true' : 'false'}
     >
-      {value}
+      <span className={styles.label}>INPUT CORE · LIMIT 9 DIGITS</span>
+      <span className={styles.value}>{value}</span>
     </div>
   )
 }
