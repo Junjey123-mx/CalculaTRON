@@ -1,5 +1,23 @@
 :root {
   --color-bg: #020617;
+  --color-bg-soft: #07111f;
+  --color-panel: rgba(5, 15, 30, 0.86);
+  --color-panel-strong: rgba(7, 17, 31, 0.96);
+
   --color-cyan: #00eaff;
+  --color-blue: #0077ff;
+  --color-magenta: #ff2bd6;
+  --color-orange: #ff9f1c;
+  --color-red: #ff3355;
+
   --text-primary: #e0faff;
+  --text-muted: #7ddfff;
+
+  --glow-cyan: 0 0 16px rgba(0, 234, 255, 0.8);
+  --glow-blue: 0 0 18px rgba(0, 119, 255, 0.65);
+  --glow-orange: 0 0 16px rgba(255, 159, 28, 0.75);
+  --glow-red: 0 0 18px rgba(255, 51, 85, 0.8);
+
+  --font-main: system-ui, sans-serif;
+  --font-tech: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
