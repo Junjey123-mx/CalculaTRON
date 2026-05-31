@@ -5,7 +5,9 @@ import { StatusBar } from './StatusBar'
 import styles from './Calculator.module.css'
 
 export function Calculator() {
-  const handleButtonPress = (_value: string) => {}
+  const handleButtonPress = (value: string) => {
+    void value
+  }
 
   return (
     <div className={styles.calculator}>
