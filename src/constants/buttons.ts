@@ -1,34 +1,37 @@
-export type ButtonKind = 'number' | 'operator' | 'utility' | 'equals' | 'danger'
+import { OPERATIONS, type Operation } from './operations'
 
-export type CalculatorButtonDef = {
+export type CalculatorButtonKind = 'number' | 'operator' | 'equals' | 'danger' | 'utility'
+
+export type CalculatorButtonConfig = {
   label: string
   value: string
-  kind: ButtonKind
+  kind: CalculatorButtonKind
+  operation?: Operation
 }
 
-export const CALCULATOR_BUTTONS: CalculatorButtonDef[] = [
+export const CALCULATOR_BUTTONS: CalculatorButtonConfig[] = [
   // Row 1
   { label: '7', value: '7', kind: 'number' },
   { label: '8', value: '8', kind: 'number' },
   { label: '9', value: '9', kind: 'number' },
-  { label: '÷', value: 'DIVIDE', kind: 'operator' },
+  { label: '÷', value: '/', kind: 'operator', operation: OPERATIONS.DIVIDE },
   // Row 2
   { label: '4', value: '4', kind: 'number' },
   { label: '5', value: '5', kind: 'number' },
   { label: '6', value: '6', kind: 'number' },
-  { label: '×', value: 'MULTIPLY', kind: 'operator' },
+  { label: '×', value: '*', kind: 'operator', operation: OPERATIONS.MULTIPLY },
   // Row 3
   { label: '1', value: '1', kind: 'number' },
   { label: '2', value: '2', kind: 'number' },
   { label: '3', value: '3', kind: 'number' },
-  { label: '-', value: 'SUBTRACT', kind: 'operator' },
+  { label: '-', value: '-', kind: 'operator', operation: OPERATIONS.SUBTRACT },
   // Row 4
   { label: '0', value: '0', kind: 'number' },
   { label: '.', value: '.', kind: 'utility' },
-  { label: '+/-', value: 'TOGGLE_SIGN', kind: 'utility' },
-  { label: '+', value: 'ADD', kind: 'operator' },
+  { label: '+/-', value: '+/-', kind: 'utility' },
+  { label: '+', value: '+', kind: 'operator', operation: OPERATIONS.ADD },
   // Row 5
-  { label: 'C', value: 'CLEAR', kind: 'danger' },
-  { label: '%', value: 'MODULO', kind: 'utility' },
-  { label: '=', value: 'EQUALS', kind: 'equals' },
+  { label: 'C', value: 'C', kind: 'danger' },
+  { label: '%', value: '%', kind: 'operator', operation: OPERATIONS.MODULO },
+  { label: '=', value: '=', kind: 'equals' },
 ]

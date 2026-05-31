@@ -4,5 +4,6 @@ export const OPERATIONS = {
   MULTIPLY: 'MULTIPLY',
   DIVIDE: 'DIVIDE',
   MODULO: 'MODULO',
-  EQUALS: 'EQUALS',
 } as const
+
+export type Operation = typeof OPERATIONS[keyof typeof OPERATIONS]
