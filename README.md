@@ -1,5 +1,7 @@
 # CalculaTRON
 
+**Demo en vivo:** [https://calcula-tron.vercel.app/](https://calcula-tron.vercel.app/)
+
 CalculaTRON es una calculadora web simple con estética futurista tipo TRON, desarrollada con React, Vite y TypeScript. El proyecto está estructurado en componentes pequeños, lógica pura separada, un hook propio para manejar el estado y pruebas automatizadas.
 
 ---
