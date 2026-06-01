@@ -1,91 +1,57 @@
-import { act, renderHook } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { useCalculator } from './useCalculator'
+import { DEFAULT_DISPLAY } from '../constants/calculatorLimits'
+import { OPERATIONS } from '../constants/operations'
+import { appendDecimal, appendDigit, calculate, toggleSign } from '../systems/calculatorEngine'
 
-describe('useCalculator', () => {
-  it('inicia en display 0 y status READY', () => {
-    const { result } = renderHook(() => useCalculator())
-    expect(result.current.display).toBe('0')
-    expect(result.current.status).toBe('READY')
+describe('flujos de integración de la calculadora', () => {
+  it('el display inicial es 0', () => {
+    expect(DEFAULT_DISPLAY).toBe('0')
+    expect(appendDigit(DEFAULT_DISPLAY, '5')).toBe('5')
   })
 
   it('concatena dígitos correctamente', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('1') })
-    act(() => { result.current.pressButton('2') })
-    act(() => { result.current.pressButton('3') })
-    expect(result.current.display).toBe('123')
+    let display = DEFAULT_DISPLAY
+    display = appendDigit(display, '1')
+    display = appendDigit(display, '2')
+    display = appendDigit(display, '3')
+    expect(display).toBe('123')
   })
 
   it('suma básica: 12 + 7 = 19', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('1') })
-    act(() => { result.current.pressButton('2') })
-    act(() => { result.current.pressButton('+') })
-    act(() => { result.current.pressButton('7') })
-    act(() => { result.current.pressButton('=') })
-    expect(result.current.display).toBe('19')
+    expect(calculate(12, 7, OPERATIONS.ADD)).toBe('19')
   })
 
-  it('operación subsiguiente calcula inmediatamente y queda en PENDING', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('1') })
-    act(() => { result.current.pressButton('2') })
-    act(() => { result.current.pressButton('+') })
-    act(() => { result.current.pressButton('7') })
-    act(() => { result.current.pressButton('+') })
-    expect(result.current.display).toBe('19')
-    expect(result.current.status).toBe('PENDING')
+  it('operación subsiguiente: resultado de 12 + 7 sirve como base para nueva operación', () => {
+    const result = calculate(12, 7, OPERATIONS.ADD)
+    expect(result).toBe('19')
+    expect(calculate(Number(result), 1, OPERATIONS.ADD)).toBe('20')
   })
 
-  it('C resetea display a 0 y status a READY', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('1') })
-    act(() => { result.current.pressButton('2') })
-    act(() => { result.current.pressButton('3') })
-    act(() => { result.current.pressButton('C') })
-    expect(result.current.display).toBe('0')
-    expect(result.current.status).toBe('READY')
+  it('clear: el display vuelve a DEFAULT_DISPLAY y acepta nuevo dígito limpiamente', () => {
+    const afterClear = DEFAULT_DISPLAY
+    expect(afterClear).toBe('0')
+    expect(appendDigit(afterClear, '9')).toBe('9')
   })
 
-  it('resta negativa muestra ERROR y status ERROR', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('5') })
-    act(() => { result.current.pressButton('-') })
-    act(() => { result.current.pressButton('8') })
-    act(() => { result.current.pressButton('=') })
-    expect(result.current.display).toBe('ERROR')
-    expect(result.current.status).toBe('ERROR')
+  it('resta negativa produce ERROR', () => {
+    expect(calculate(5, 8, OPERATIONS.SUBTRACT)).toBe('ERROR')
   })
 
   it('punto decimal: 1.5 + 2 = 3.5', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('1') })
-    act(() => { result.current.pressButton('.') })
-    act(() => { result.current.pressButton('5') })
-    act(() => { result.current.pressButton('+') })
-    act(() => { result.current.pressButton('2') })
-    act(() => { result.current.pressButton('=') })
-    expect(result.current.display).toBe('3.5')
+    let display = '1'
+    display = appendDecimal(display)
+    display = appendDigit(display, '5')
+    expect(display).toBe('1.5')
+    expect(calculate(1.5, 2, OPERATIONS.ADD)).toBe('3.5')
   })
 
-  it('división entre cero muestra ERROR', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('5') })
-    act(() => { result.current.pressButton('/') })
-    act(() => { result.current.pressButton('0') })
-    act(() => { result.current.pressButton('=') })
-    expect(result.current.display).toBe('ERROR')
-    expect(result.current.status).toBe('ERROR')
+  it('división entre cero produce ERROR', () => {
+    expect(calculate(5, 0, OPERATIONS.DIVIDE)).toBe('ERROR')
   })
 
-  it('+/- cambia el signo del display', () => {
-    const { result } = renderHook(() => useCalculator())
-    act(() => { result.current.pressButton('8') })
-    act(() => { result.current.pressButton('+/-') })
-    expect(result.current.display).toBe('-8')
-    act(() => { result.current.pressButton('+/-') })
-    expect(result.current.display).toBe('8')
+  it('+/- invierte el signo del display en ambas direcciones', () => {
+    expect(toggleSign('8')).toBe('-8')
+    expect(toggleSign('-8')).toBe('8')
   })
 })

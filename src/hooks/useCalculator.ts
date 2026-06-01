@@ -130,10 +130,10 @@ export function useCalculator() {
       pressDigit(value)
       return
     }
-    if (value === '.') { pressDecimal(); return }
-    if (value === '+/-') { pressToggleSign(); return }
-    if (value === 'C') { pressClear(); return }
-    if (value === '=') { pressEquals(); return }
+    if (value === '.') return pressDecimal()
+    if (value === '+/-') return pressToggleSign()
+    if (value === 'C') return pressClear()
+    if (value === '=') return pressEquals()
     const operation = mapValueToOperation(value)
     if (operation !== null) {
       pressOperation(operation)
@@ -147,6 +147,7 @@ export function useCalculator() {
   return {
     display,
     status,
+    pendingOperation,
     handleButtonPress,
     pressDigit,
     pressDecimal,

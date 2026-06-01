@@ -7,7 +7,6 @@ type StatusBarProps = {
 export function StatusBar({ status }: StatusBarProps) {
   return (
     <div className={styles.status}>
-      <span>MODE: STANDARD</span>
       <span>STATUS: {status}</span>
     </div>
   )
